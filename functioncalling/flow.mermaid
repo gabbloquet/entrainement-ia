@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant User
+    participant Backend
+    participant LLM
+
+    User->>Backend: "Ajoute un rappel pour appeler Paul demain à 10h"
+    Backend->>LLM: Voici la demande de l'utilisateur "Ajoute un rappel demain à 9h", quelles fonctions dois-je executer ?
+    LLM->>Backend: { "name": "create_task", "arguments": { "title": "appeler Paul", "datetime": "2025-04-16T10:00:00" } }
+    Backend->>Backend: Ajoute la tâche dans la todo list (Appel au repository)
+    Backend-->>LLM: L'action a bien été éxécutée, génère moi le texte de retour
+    LLM->>Backend: "Le rappel pour appeler Paul demain à 10h a été ajouté."
+    Backend-->>User: "Le rappel pour appeler Paul demain à 10h a été ajouté."

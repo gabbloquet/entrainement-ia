@@ -1,0 +1,42 @@
+[
+  {
+    "name": "create_task",
+    "description": "Ajoute une nouvelle tâche à la todo list",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Le titre ou sujet de la tâche"
+        },
+        "datetime": {
+          "type": "string",
+          "description": "Date et heure au format ISO 8601 (ex: 2025-04-16T10:00:00)"
+        }
+      },
+      "required": ["title", "datetime"]
+    }
+  },
+  {
+    "name": "list_tasks",
+    "description": "Retourne la liste actuelle des tâches",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "delete_task",
+    "description": "Supprime une tâche à partir de son titre",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Le titre de la tâche à supprimer"
+        }
+      },
+      "required": ["title"]
+    }
+  }
+]
