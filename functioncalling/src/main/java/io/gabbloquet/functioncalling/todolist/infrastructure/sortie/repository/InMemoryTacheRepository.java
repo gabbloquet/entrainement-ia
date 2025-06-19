@@ -1,7 +1,7 @@
-package io.gabbloquet.functioncalling.infrastructure.sortie.repository;
+package io.gabbloquet.functioncalling.todolist.infrastructure.sortie.repository;
 
-import io.gabbloquet.functioncalling.domaine.modele.Tache;
-import io.gabbloquet.functioncalling.domaine.TacheRepository;
+import io.gabbloquet.functioncalling.todolist.domaine.modele.Tache;
+import io.gabbloquet.functioncalling.todolist.domaine.TacheRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

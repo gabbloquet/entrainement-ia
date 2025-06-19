@@ -1,4 +1,4 @@
-package io.gabbloquet.functioncalling.domaine.modele;
+package io.gabbloquet.functioncalling.todolist.domaine.modele;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

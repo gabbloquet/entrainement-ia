@@ -1,7 +1,7 @@
-package io.gabbloquet.functioncalling;
+package io.gabbloquet.functioncalling.todolist;
 
-import io.gabbloquet.functioncalling.domaine.modele.Tache;
-import io.gabbloquet.functioncalling.domaine.TacheRepository;
+import io.gabbloquet.functioncalling.todolist.domaine.modele.Tache;
+import io.gabbloquet.functioncalling.todolist.domaine.TacheRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

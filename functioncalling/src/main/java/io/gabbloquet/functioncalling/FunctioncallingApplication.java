@@ -1,6 +1,6 @@
 package io.gabbloquet.functioncalling;
 
-import io.gabbloquet.functioncalling.infrastructure.entree.ClientLigneDeCommande;
+import io.gabbloquet.functioncalling.todolist.infrastructure.entree.ClientLigneDeCommande;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

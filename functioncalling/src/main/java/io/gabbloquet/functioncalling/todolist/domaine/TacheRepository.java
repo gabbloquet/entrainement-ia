@@ -1,6 +1,6 @@
-package io.gabbloquet.functioncalling.domaine;
+package io.gabbloquet.functioncalling.todolist.domaine;
 
-import io.gabbloquet.functioncalling.domaine.modele.Tache;
+import io.gabbloquet.functioncalling.todolist.domaine.modele.Tache;
 import java.util.List;
 
 public interface TacheRepository {

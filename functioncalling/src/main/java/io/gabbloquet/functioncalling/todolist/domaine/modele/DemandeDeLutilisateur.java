@@ -1,4 +1,4 @@
-package io.gabbloquet.functioncalling.domaine.modele;
+package io.gabbloquet.functioncalling.todolist.domaine.modele;
 
 public record DemandeDeLutilisateur(
         String textuelle
