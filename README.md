@@ -16,11 +16,11 @@ Ce repo contient des projets d'expérimentation autour de l'IA, avec un focus pa
 
 ## 🧩 Projets inclus
 
-| Nom du projet                  | Description                                                                 | Techs principales                     |
-|-------------------------------|-----------------------------------------------------------------------------|---------------------------------------|
-| `function-calling-assistant`  | Assistant de tâches utilisant le Function Calling d'OpenAI                  | OpenAI API, JSON Schema, Java/Python |
-| *(à venir)* `rag-chatbot`     | Chatbot enrichi par des documents internes via RAG                         | LangChain, FAISS, Embeddings          |
-| *(à venir)* `agent-reporter`  | Agent LLM capable de générer des rapports en autonomie                     | LangChain Agents, Tool Use            |
+| Nom du projet                  | Description                                                                 | Techs principales                    |
+|-------------------------------|-----------------------------------------------------------------------------|--------------------------------------|
+| `function-calling-assistant`  | Assistant de tâches utilisant le Function Calling d'OpenAI                  | OpenAI API, JSON Schema, Java/Spring |
+| *(à venir)* `rag-chatbot`     | Chatbot enrichi par des documents internes via RAG                         | LangChain, FAISS, Embeddings         |
+| *(à venir)* `agent-reporter`  | Agent LLM capable de générer des rapports en autonomie                     | LangChain Agents, Tool Use           |
 
 ---
 

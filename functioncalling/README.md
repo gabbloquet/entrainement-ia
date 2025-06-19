@@ -15,6 +15,14 @@ Le **Function Calling** permet à un LLM de :
 4. **Laisser ton backend exécuter la logique réelle** (BDD, API, etc.).
 5. **Intégrer le résultat dans une réponse finale**, toujours en langage naturel.
 
+En quelques lignes, le `Function Calling`, c’est une manière de demander à un LLM (modèle de langage) comme GPT-4, d'appeler automatiquement des fonctions de ton code en fonction de ce que l’utilisateur demande.
+
+Tu lui dis : « Voici les fonctions que tu peux utiliser, voici ce qu’elles font ».
+Ensuite, GPT analyse la requête de l’utilisateur, et choisit tout seul la fonction à appeler (avec les bons arguments).
+
+🧠 Tu n’as plus à parser manuellement les requêtes utilisateurs → c’est le LLM qui comprend et structure les appels.
+Ça permet de connecter une IA à des actions concrètes dans ton app, comme interroger une BDD, envoyer un email ou lancer une recherche.
+
 ### Exemple :
 
 **Utilisateur : "Ajoute un rappel pour appeler Paul demain à 10h"**

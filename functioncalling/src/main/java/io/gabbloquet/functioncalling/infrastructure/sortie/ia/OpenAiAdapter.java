@@ -1,12 +1,13 @@
-package io.gabbloquet.functioncalling.infrastructure.ai;
+package io.gabbloquet.functioncalling.infrastructure.sortie.ia;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.gabbloquet.functioncalling.application.service.DemandeDeLutilisateur;
-import io.gabbloquet.functioncalling.domain.model.ReponseRetravaillee;
-import io.gabbloquet.functioncalling.domain.port.AiPort;
+import io.gabbloquet.functioncalling.domaine.modele.ActionDemandeParLutilisateur;
+import io.gabbloquet.functioncalling.domaine.modele.DemandeDeLutilisateur;
+import io.gabbloquet.functioncalling.domaine.modele.ReponseRetravaillee;
+import io.gabbloquet.functioncalling.domaine.AiPort;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -23,15 +24,15 @@ public class OpenAiAdapter implements AiPort {
     private static final HttpClient client = HttpClient.newHttpClient();
 
     @Override
-    public DemandeDeLutilisateur recupererFonctionEtArguments(String demandeDeLutilisateur) throws Exception {
+    public ActionDemandeParLutilisateur recupererActionDemandee(DemandeDeLutilisateur demande) throws Exception {
         JsonNode functions = mapper.readTree(OpenAiAdapter.class.getResourceAsStream("/schema/functions.json"));
 
-        ObjectNode userMessage = mapper.createObjectNode();
-        userMessage.put("role", "user");
-        userMessage.put("content", demandeDeLutilisateur);
+        ObjectNode discussionsAvecLia = mapper.createObjectNode();
+        discussionsAvecLia.put("role", "user");
+        discussionsAvecLia.put("content", demande.textuelle());
 
         ArrayNode messages = mapper.createArrayNode();
-        messages.add(userMessage);
+        messages.add(discussionsAvecLia);
 
         ObjectNode requestBody = mapper.createObjectNode();
         requestBody.put("model", "gpt-4.1-nano");
@@ -61,34 +62,34 @@ public class OpenAiAdapter implements AiPort {
         if (functionCall == null) {
             throw new RuntimeException("Réponse IA invalide : pas de function_call");
         }
-        String functionName = functionCall.get("name") != null ? functionCall.get("name").asText() : null;
-        if (functionName == null) {
+        String nomDeLaFonction = functionCall.get("name") != null ? functionCall.get("name").asText() : null;
+        if (nomDeLaFonction == null) {
             throw new RuntimeException("Réponse IA invalide : pas de nom de fonction");
         }
         JsonNode rawArgs = functionCall.get("arguments");
-        JsonNode args;
+        JsonNode arguments;
         if (rawArgs != null && rawArgs.isTextual()) {
-            args = mapper.readTree(rawArgs.asText());
+            arguments = mapper.readTree(rawArgs.asText());
         } else {
-            args = rawArgs;
+            arguments = rawArgs;
         }
-        return new DemandeDeLutilisateur(demandeDeLutilisateur, functionName, args, userMessage);
+        return new ActionDemandeParLutilisateur(nomDeLaFonction, arguments, discussionsAvecLia);
     }
 
     @Override
-    public ReponseRetravaillee repondre(String reponseDeLaFonction, DemandeDeLutilisateur appel) throws Exception {
+    public ReponseRetravaillee repondre(String reponseDeLaFonction, ActionDemandeParLutilisateur action) throws Exception {
         ArrayNode messages = mapper.createArrayNode();
-        messages.add(appel.userMessage());
+        messages.add(action.discussionAvecLia());
         ObjectNode functionCallNode = mapper.createObjectNode();
-        functionCallNode.put("name", appel.nomDeLaFonction());
-        functionCallNode.put("arguments", mapper.writeValueAsString(appel.argumentsDeLaFonction()));
+        functionCallNode.put("name", action.nomDeLaFonction());
+        functionCallNode.put("arguments", mapper.writeValueAsString(action.argumentsDeLaFonction()));
         ObjectNode functionCallMsg = mapper.createObjectNode();
         functionCallMsg.put("role", "assistant");
         functionCallMsg.set("function_call", functionCallNode);
         messages.add(functionCallMsg);
         ObjectNode functionMessage = mapper.createObjectNode();
         functionMessage.put("role", "function");
-        functionMessage.put("name", appel.nomDeLaFonction());
+        functionMessage.put("name", action.nomDeLaFonction());
         functionMessage.put("content", reponseDeLaFonction);
         messages.add(functionMessage);
 

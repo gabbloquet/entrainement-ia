@@ -1,11 +1,10 @@
-package io.gabbloquet.functioncalling.application.service;
+package io.gabbloquet.functioncalling.domaine.modele;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public record DemandeDeLutilisateur(
-        String demandeDeLutilisateur,
+public record ActionDemandeParLutilisateur(
         String nomDeLaFonction,
         JsonNode argumentsDeLaFonction,
-        ObjectNode userMessage
+        ObjectNode discussionAvecLia
 ) {}

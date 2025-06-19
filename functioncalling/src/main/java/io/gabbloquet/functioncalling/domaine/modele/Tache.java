@@ -1,13 +1,13 @@
-package io.gabbloquet.functioncalling.domain.model;
+package io.gabbloquet.functioncalling.domaine.modele;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task {
+public class Tache {
     private final String title;
     private final LocalDateTime datetime;
 
-    public Task(String title, LocalDateTime datetime) {
+    public Tache(String title, LocalDateTime datetime) {
         this.title = title;
         this.datetime = datetime;
     }
@@ -19,8 +19,8 @@ public class Task {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(title, task.title) && Objects.equals(datetime, task.datetime);
+        Tache tache = (Tache) o;
+        return Objects.equals(title, tache.title) && Objects.equals(datetime, tache.datetime);
     }
 
     @Override
