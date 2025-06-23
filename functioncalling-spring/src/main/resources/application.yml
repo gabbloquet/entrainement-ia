@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: functioncalling-spring
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4.1-nano
+openweather:
+  api:
+    key: ${OPEN_WEATHER_API_KEY}

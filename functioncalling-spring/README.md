@@ -1,4 +1,4 @@
-# 🤖 function-calling-assistant
+# 🤖 function-calling-assistant avec Spring AI
 
 > Assistant LLM capable d’interagir avec des fonctions backend simulées (tâches, rappels, suppression).
 
@@ -25,13 +25,11 @@ Ensuite, GPT analyse la requête de l’utilisateur, et choisit tout seul la fon
 
 ### Exemple :
 
-**Utilisateur : "Ajoute un rappel pour appeler Paul demain à 10h"**
+**Utilisateur : "Quelle météo fait-il à Barcelone"**
 
-↓ Modèle : { "name": "create_task", "arguments": { "title": "appeler Paul", "datetime": "2025-04-16T10:00:00" } } 
-↓ Ton backend ajoute la tâche dans ta todo list. 
-↓ Le LLM rédige : "C'est noté ! J'ai ajouté un rappel pour appeler Paul demain à 10h."
-
-[Diagramme Mermaid](./flow.mermaid)
+↓ Modèle : { "name": "recuperer_meteo", "arguments": { "ville": "Barcelone" } }  
+↓ Ton backend contact le service permettant de récupérer la météo de Barcelone aujourd’hui. 
+↓ Le LLM rédige : "Il fait 25°C aujourd’hui dans Barcelone, avec un vent de 10 km/h et des nuages."
 
 ---
 
@@ -39,68 +37,26 @@ Ensuite, GPT analyse la requête de l’utilisateur, et choisit tout seul la fon
 
 Ces fonctions sont transmises au modèle via l’API, au format JSON Schema :
 
-### 📝 1. `create_task`
+### 📝 1. `recuperer_meteo`
 
-Crée une nouvelle tâche.
+Récupérer la météo.
 
 ```json
 {
-  "name": "create_task",
-  "description": "Ajoute une nouvelle tâche à la todo list",
+  "name": "recuperer_meteo",
+  "description": "Retourne la météo de la ville indiquée",
   "parameters": {
     "type": "object",
     "properties": {
-      "title": {
+      "ville": {
         "type": "string",
-        "description": "Le titre ou sujet de la tâche"
-      },
-      "datetime": {
-        "type": "string",
-        "description": "Date et heure au format ISO 8601 (ex: 2025-04-16T10:00:00)"
+        "description": "Le nom de la ville"
       }
-    },
-    "required": ["title", "datetime"]
-  }
-}
-```
-
-
-### 📝 2. `list_tasks`
-
-Retourne la liste des tâches.
-
-```json
-{
-  "name": "list_tasks",
-  "description": "Retourne la liste actuelle des tâches",
-  "parameters": {
-    "type": "object",
-    "properties": {}
-  }
-}
-```
-
-### 📝 3. `delete_task`
-
-Retourne la liste des tâches.
-
-```json
-{
-  "name": "delete_task",
-  "description": "Supprime une tâche à partir de son titre",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "title": {
-        "type": "string",
-        "description": "Le titre de la tâche à supprimer"
-      }
-    },
-    "required": ["title"]
+    }
   }
 }
 ```
 
 ### Configuration
 
-Ajouter les variables d’environnement suivantes : `OPENAI_API_KEY`.
+Ajouter les variables d’environnement suivantes : `OPENAI_API_KEY` & `OPEN_WEATHER_API_KEY`.
